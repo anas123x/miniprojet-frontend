@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,7 +33,8 @@ import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ProfileLayoutComponent
+    ProfileLayoutComponent,
+
  
   
   ],
