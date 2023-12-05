@@ -8,6 +8,6 @@ export class etudiant {
     ecole!: string
     email!: string
     dateNaissance!: Date
-    reservations!: reservation
+    reservations!: reservation[]
 
 }

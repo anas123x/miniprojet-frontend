@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { etudiant } from '../Models/etudiant';
+import { reservation } from '../Models/reservation';
 
 
 @Injectable({
@@ -35,6 +36,10 @@ export class EtudiantsServiceService {
 
   findStudentWithEmail(email: string){
     return this._http.get<etudiant>(this.apiUrl+"etudiant"+"/findEtudiantwithemail/"+email)
+  }
+  passReservation(idEtudiant: number, res:reservation){
+    //long idEtudiant , Reservation res
+    return this._http.post<reservation>(this.apiUrl+"etudiant"+"/passerUneReservation/"+idEtudiant, res)
   }
 
 }

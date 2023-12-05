@@ -31,20 +31,15 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    
+
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
     ProfileLayoutComponent,
-<<<<<<< Updated upstream
 
-=======
-   
->>>>>>> Stashed changes
- 
-  
+
   ],
   providers: [],
   bootstrap: [AppComponent]
