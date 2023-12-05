@@ -20,7 +20,8 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   declarations: [
    
