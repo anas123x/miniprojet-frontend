@@ -2,8 +2,6 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-import { EtudiantsServiceService } from 'src/app/services/etudiants-service.service';
-import { etudiant } from 'src/app/Models/etudiant';
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +12,12 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router,private etudiantService: EtudiantsServiceService) {
+  constructor(location: Location,  private element: ElementRef, private router: Router) {
     this.location = location;
   }
-  connectedStudent!: etudiant;
+
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    const studentConEmail = 'iidoudichaima@gmail.com'
-    this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
-      this.connectedStudent = data;
-    })
   }
   logout() :void {
     console.log('logout')
