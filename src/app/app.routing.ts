@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'profile',
     pathMatch: 'full',
   }, {
     path: '',
@@ -39,6 +40,16 @@ const routes: Routes =[
         loadChildren: () => import('src/app/layouts/profile-layout/profile-layout.module').then(m => m.ProfileLayoutModule)
       }
     ]
+  },
+  {
+    path: '',
+    component: UserProfileComponent,
+    children: [
+      {
+        path: 'userProfile',
+        loadChildren: () => import('src/app/layouts/profile-layout/profile-layout.module').then(m => m.ProfileLayoutModule)
+      }
+    ]
   }
 ];
 
@@ -46,7 +57,7 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
+    RouterModule.forRoot(routes, {
       useHash: true
     })
   ],

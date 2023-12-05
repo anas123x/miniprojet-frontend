@@ -15,6 +15,9 @@ import { ComponentsModule } from './components/components.module';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+
+
 
 
 
@@ -27,14 +30,19 @@ import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
     ProfileLayoutComponent,
+<<<<<<< Updated upstream
 
+=======
+   
+>>>>>>> Stashed changes
  
   
   ],
