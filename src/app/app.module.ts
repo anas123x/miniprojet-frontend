@@ -16,6 +16,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+
 
 
 
@@ -38,6 +40,9 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     AdminLayoutComponent,
     AuthLayoutComponent,
     ProfileLayoutComponent,
+    ReservationsComponent,
+    
+    
 
 
   ],
