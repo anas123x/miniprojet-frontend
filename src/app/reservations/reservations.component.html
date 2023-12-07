@@ -51,7 +51,11 @@
                                 </span>
                                 <td>
                                     <!-- Bouton pour valider la réservation -->
-                                    <button *ngIf="!reservation.estValid" class="btn btn-outline-success" (click)="validateReservation(reservation.idReservation)" >Valider</button>
+                                    <button *ngIf="!reservation.estValid" class="btn btn-outline-success"
+                                        (click)="validateReservation(reservation.idReservation)">Valider</button>
+                                </td>
+                                <td><button *ngIf="!reservation.estValid" class="btn btn-outline-success"
+                                        (click)="sendMailToStudentWithValidReservation(reservation.idReservation)">mail</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -60,4 +64,10 @@
             </div>
         </div>
     </div>
+</div>
+<br>
+<br>
+<div style="text-align: center;">
+    <h2>Statistique des Reservations</h2>
+    <h1>{{this.stats}}</h1>
 </div>

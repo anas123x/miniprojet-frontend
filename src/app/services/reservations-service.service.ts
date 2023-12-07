@@ -25,4 +25,7 @@ export class ReservationsServiceService {
   validerReservation(idReservation: number){
     return this._http.get(this.apiUrl+"reservation"+"/validerReservation/"+idReservation)
   }
+  statistiquesReservation(){
+    return this._http.get(this.apiUrl+"reservation"+"/statistiques")
+  }
 }
