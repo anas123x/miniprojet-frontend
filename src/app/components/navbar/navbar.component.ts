@@ -14,32 +14,32 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router,private etudiantService: EtudiantsServiceService) {
+  constructor(location: Location, private element: ElementRef, private router: Router, private etudiantService: EtudiantsServiceService) {
     this.location = location;
   }
   connectedStudent!: etudiant;
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    const studentConEmail = 'iidoudichaima@gmail.com'
+    const studentConEmail = 'idoudi.emna@gmail.com'
     this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
       this.connectedStudent = data;
     })
   }
-  logout() :void {
+  logout(): void {
     console.log('logout')
     localStorage.removeItem('access_token');
     this.router.navigate(['login'])
   }
-  getTitle(){
+  getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
+    if (titlee.charAt(0) === '#') {
+      titlee = titlee.slice(1);
     }
 
-    for(var item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee){
-            return this.listTitles[item].title;
-        }
+    for (var item = 0; item < this.listTitles.length; item++) {
+      if (this.listTitles[item].path === titlee) {
+        return this.listTitles[item].title;
+      }
     }
     return 'Dashboard';
   }
