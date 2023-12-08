@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { TestComponent } from './test/test.component';
 
 
 
@@ -34,6 +35,7 @@ import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.
     AdminLayoutComponent,
     AuthLayoutComponent,
     ProfileLayoutComponent,
+    TestComponent,
 
  
   

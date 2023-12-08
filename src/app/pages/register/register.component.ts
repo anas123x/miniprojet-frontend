@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,7 +13,7 @@ export class RegisterComponent {
   serverError: string = '';
   serverSucess: boolean = false;
  
-  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router) {
+  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private authService : AuthServiceService) {
     this.signUpForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -26,6 +27,7 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
+    this.serverError=""
     console.log("aaaa")
     if (this.signUpForm.invalid) {
       console.log("bbbbbbb")
@@ -40,7 +42,7 @@ export class RegisterComponent {
       password: this.signUpForm.get('password')?.value
     };
 
-    this.http.post('http://localhost:8089/api/v1/auth/register', userData)
+    this.authService.register(userData)
       .subscribe(
         (response) => {
           console.log('User registered successfully!', response);
@@ -54,6 +56,7 @@ export class RegisterComponent {
             // Display the error in a pop-up using alert or a custom modal
           } else {
             console.error('Error occurred during registration:', error);
+            this.serverError=error.message
           }
         }
       );

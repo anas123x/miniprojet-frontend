@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   serverError: string = '';
   accessToken: string = '';
   userData: any = {};
-  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router) {
+  constructor(private http: HttpClient, private formBuilder: FormBuilder,private router: Router,private authService:AuthServiceService) {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
     return this.signInForm.controls;
   }
   getUserDataByToken(): void {
-    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken)
+   this.authService.setAccessToken(this.accessToken)
 
-    this.http.get<any>('http://localhost:8089/api/v1/users/getDataByToken', {headers: headers })
+    this.authService.getUserDataByToken()
       .subscribe(
         (response) => {
           // Handle success response - store or use the user data retrieved
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
       );
   }
   onSubmit(): void {
+    
     console.log("aaaaa")
     if (this.signInForm.invalid) {
       console.log("bbbbbbb")
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
       password: this.signInForm.get('password')?.value
     };
     // Make a POST request to your backend API for authentication
-    this.http.post<any>('http://localhost:8089/api/v1/auth/authenticate', userData)
+   this.authService.login(userData)
       .subscribe(
         (response) => {
           // Handle success response (e.g., store token, redirect user)
@@ -88,6 +89,7 @@ export class LoginComponent implements OnInit {
             // Display the error in a pop-up using alert or a custom modal
           } else {
             console.error('Error occurred during authentication:', error);
+            this.serverError=error.message
           }
         }
       );
