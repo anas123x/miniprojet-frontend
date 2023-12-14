@@ -12,23 +12,30 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BlocComponent } from 'src/app/bloc/bloc.component';
+import { UpdateChambreComponent } from 'src/app/chambre/updatechambre/updatechambre.component';
+import { AddchambreComponent } from 'src/app/chambre/addchambre/addchambre.component';
+
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
+   
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   declarations: [
     DashboardComponent,
-
+    BlocComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    UpdateChambreComponent,
+    AddchambreComponent
   ]
 })
 

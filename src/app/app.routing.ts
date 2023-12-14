@@ -11,7 +11,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'profile',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
     path: '',

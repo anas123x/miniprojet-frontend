@@ -16,6 +16,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { BlocComponent } from './bloc/bloc.component';
+import { ChambreComponent } from './chambre/chambre.component';
+import { UpdateChambreComponent } from './chambre/updatechambre/updatechambre.component';
+import { AddchambreComponent } from './chambre/addchambre/addchambre.component';
 
 
 
@@ -31,6 +35,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule
     
   ],
   declarations: [
@@ -38,13 +43,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     AdminLayoutComponent,
     AuthLayoutComponent,
     ProfileLayoutComponent,
-<<<<<<< Updated upstream
 
-=======
-   
->>>>>>> Stashed changes
- 
-  
+
   ],
   providers: [],
   bootstrap: [AppComponent]
