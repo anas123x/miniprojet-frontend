@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Console } from 'console';
 import { Chambre } from 'src/app/classes/Chambre';
 import { TypeChambre } from 'src/app/classes/TypeChambre';
 import { ChambreserviceService } from 'src/app/services/chambreservice.service';

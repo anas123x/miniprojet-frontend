@@ -16,6 +16,10 @@ import { ListFoyerComponent } from 'src/app/Foyer/list-foyer/list-foyer.componen
 import { AddFoyerComponent } from 'src/app/Foyer/add-foyer/add-foyer.component';
 import { ModifierFoyerComponent } from 'src/app/Foyer/modifier-foyer/modifier-foyer.component';
 import { AfficherblocsComponent } from 'src/app/Foyer/afficherblocs/afficherblocs.component';
+import { ChambreComponent } from 'src/app/chambre/chambre.component';
+import { AddchambreComponent } from 'src/app/chambre/addchambre/addchambre.component';
+import { UpdateChambreComponent } from 'src/app/chambre/updatechambre/updatechambre.component';
+import { BlocComponent } from 'src/app/bloc/bloc.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -36,7 +40,11 @@ ListFoyerComponent,
     AddFoyerComponent ,
     ListFoyerComponent ,
     ModifierFoyerComponent,
-    AfficherblocsComponent
+    AfficherblocsComponent,
+    ChambreComponent,
+    AddchambreComponent,
+    UpdateChambreComponent,
+    BlocComponent
 
   ]
 })

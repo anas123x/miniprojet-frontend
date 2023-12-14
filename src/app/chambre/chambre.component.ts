@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ChambreComponent implements OnInit {
 
   chambres: Chambre[] = [];
+  accessToken:string ="";
 
   constructor(private chambreservice: ChambreserviceService ,  private router: Router , private route: ActivatedRoute) { }
 
@@ -18,6 +19,9 @@ export class ChambreComponent implements OnInit {
   }
 
   getChambres() {
+    this.accessToken = localStorage.getItem('access_token') ;
+
+    this.chambreservice.setAccessToken(this.accessToken)
     this.chambreservice.getChambres().subscribe(
       (data) => {
         this.chambres = data;
