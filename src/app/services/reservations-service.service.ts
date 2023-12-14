@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { reservation } from '../Models/reservation';
 import { etudiant } from '../Models/etudiant';
@@ -8,24 +8,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReservationsServiceService {
+  private accessToken: string = '';
 
   constructor(private _http: HttpClient) { }
   apiUrl: string = environment.baseUrl;
   getAllReservations() {
-    return this._http.get<reservation[]>(this.apiUrl + "reservation" + "/retrieveReservations")
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<reservation[]>(this.apiUrl + "reservation" + "/retrieveReservations",{headers})
     //return this._http.get<etudiant[]>(this.apiUrl + "etudiant" + "/retrieve-all-etudiant")
   }
   getAllStudents() {
-    return this._http.get<etudiant[]>(this.apiUrl + "etudiant" + "/retrieve-all-etudiant")
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<etudiant[]>(this.apiUrl + "etudiant" + "/retrieve-all-etudiant",{headers})
   }
   findStudentWithEmail(email: string){
-    return this._http.get<etudiant>(this.apiUrl+"etudiant"+"/findEtudiantwithemail/"+email)
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<etudiant>(this.apiUrl+"etudiant"+"/findEtudiantwithemail/"+email,{headers})
   }
 
   validerReservation(idReservation: number){
-    return this._http.get(this.apiUrl+"reservation"+"/validerReservation/"+idReservation)
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get(this.apiUrl+"reservation"+"/validerReservation/"+idReservation,{headers})
   }
   statistiquesReservation(){
-    return this._http.get(this.apiUrl+"reservation"+"/statistiques")
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get(this.apiUrl+"reservation"+"/statistiques",{headers})
   }
 }

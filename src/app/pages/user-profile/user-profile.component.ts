@@ -4,36 +4,42 @@ import { etudiant } from 'src/app/Models/etudiant';
 import { reservation } from 'src/app/Models/reservation';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { EtudiantsServiceService } from 'src/app/services/etudiants-service.service';
-
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  accessToken: string = '';
+  studentConEmail = '';
 
-  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder, ) { }
+  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder,private authService:AuthServiceService ) { }
   userProfileForm: FormGroup;
   addReservationForm: FormGroup;
   connectedStudent!: etudiant;
   ngOnInit(): void {
-    const studentConEmail = 'idoudi.emna@gmail.com';
-
-    this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
-      this.connectedStudent = data;
-      console.log(this.connectedStudent);
-
-      // Move form initialization inside the subscribe callback
-      this.userProfileForm = this.fb.group({
-        nom: [this.connectedStudent.nomEt, [Validators.required]],
-        prenom: [this.connectedStudent.prenomEt, [Validators.required]],
-        cin: [this.connectedStudent.cin, [Validators.required]],
+    this.accessToken = localStorage.getItem('access_token') ;
+    this.authService.setAccessToken(this.accessToken)
+    this.authService.getUserDataByToken().subscribe(data=>{
+      this.etudiantService.findStudentWithEmail(data.email).subscribe(data => {
+        this.connectedStudent = data;
+        console.log(this.connectedStudent);
+  
+        // Move form initialization inside the subscribe callback
+        this.userProfileForm = this.fb.group({
+          nom: [this.connectedStudent.nomEt, [Validators.required]],
+          prenom: [this.connectedStudent.prenomEt, [Validators.required]],
+          cin: [this.connectedStudent.cin, [Validators.required]],
+        });
+        this.addReservationForm = this.fb.group({
+          idReservation: ['', [Validators.required]],
+          anneeUniversitaire: ['', [Validators.required]],
+        });
       });
-      this.addReservationForm = this.fb.group({
-        idReservation: ['', [Validators.required]],
-        anneeUniversitaire: ['', [Validators.required]],
-      });
-    });
+    })
+    
+   
   }
 
   EditProfile() {

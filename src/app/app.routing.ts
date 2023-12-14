@@ -41,16 +41,7 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: '',
-    component: UserProfileComponent,
-    children: [
-      {
-        path: 'userProfile',
-        loadChildren: () => import('src/app/layouts/profile-layout/profile-layout.module').then(m => m.ProfileLayoutModule)
-      }
-    ]
-  }
+
 ];
 
 @NgModule({

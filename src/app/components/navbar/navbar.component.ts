@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   connectedStudent!: etudiant;
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    const studentConEmail = 'idoudi.emna@gmail.com'
+    const studentConEmail = 'anas@gmail.com'
     this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
       this.connectedStudent = data;
     })

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { etudiant } from '../Models/etudiant';
 import { reservation } from '../Models/reservation';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,32 +15,45 @@ export class EtudiantsServiceService {
 
   apiUrl: string = environment.baseUrl;
 
+  private accessToken: string = '';
+
   getAllStudents() {
-    return this._http.get<etudiant[]>(this.apiUrl + "etudiant" + "/retrieve-all-etudiant")
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<etudiant[]>(this.apiUrl  + "retrieve-all-etudiant",{headers})
   }
 
-  addStudent(etudiant: etudiant) {
-    return this._http.post<etudiant>(this.apiUrl + "etudiant" + "/addetudiant", etudiant)
-  }
+  
 
   updateStudent(etudiant: etudiant) {
-    return this._http.put<etudiant>(this.apiUrl + "etudiant" + "/updateetudiant", etudiant)
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.put<etudiant>(this.apiUrl + "updateetudiant", etudiant,{headers})
   }
 
   removeStudent(idEtudiant: number) {
-    return this._http.delete<etudiant>(this.apiUrl + "etudiant" + "/remouve-etudiant/"+idEtudiant)
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.delete<etudiant>(this.apiUrl  + "remouve-etudiant/"+idEtudiant,{headers})
   }
   
   findStudent(idEtudiant: number){
-    return this._http.get<etudiant>(this.apiUrl+ "etudiant" + "/retrieve-etudiant/"+idEtudiant)
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<etudiant>(this.apiUrl+ "retrieve-etudiant/"+idEtudiant,{headers})
   }
 
-  findStudentWithEmail(email: string){
-    return this._http.get<etudiant>(this.apiUrl+"etudiant"+"/findEtudiantwithemail/"+email)
+  findStudentWithEmail(email: string): Observable<any>{
+    
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this._http.get<etudiant>(this.apiUrl+"findEtudiantwithemail/"+email,{headers})
   }
   passReservation(idEtudiant: number, res:reservation){
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
     //long idEtudiant , Reservation res
-    return this._http.post<reservation>(this.apiUrl+"etudiant"+"/passerUneReservation/"+idEtudiant, res)
+    return this._http.post<reservation>(this.apiUrl+"passerUneReservation/"+idEtudiant, res,{headers})
   }
   
 
