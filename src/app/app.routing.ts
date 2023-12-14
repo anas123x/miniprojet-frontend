@@ -10,7 +10,7 @@ import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
     path: '',

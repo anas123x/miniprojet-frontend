@@ -15,6 +15,10 @@ import { ComponentsModule } from './components/components.module';
 import { LoginComponent } from './pages/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.component';
+import { ListFoyerComponent } from './Foyer/list-foyer/list-foyer.component';
+import { AddFoyerComponent } from './Foyer/add-foyer/add-foyer.component';
+import { ModifierFoyerComponent } from './Foyer/modifier-foyer/modifier-foyer.component';
+import { AfficherblocsComponent } from './Foyer/afficherblocs/afficherblocs.component';
 
 
 @NgModule({
@@ -32,9 +36,13 @@ import { ProfileLayoutComponent } from './layouts/profile-layout/profile-layout.
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ProfileLayoutComponent
- 
-  
+    ProfileLayoutComponent,
+    AddFoyerComponent,
+    ModifierFoyerComponent,
+    AfficherblocsComponent,
+    
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
