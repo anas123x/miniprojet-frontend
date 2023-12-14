@@ -9,40 +9,50 @@ import { Bloc } from '../Models/Bloc';
   providedIn: 'root'
 })
 export class FoyerservicesService {
+accessToken ="";
 
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-    }),
-  };
   constructor(private http: HttpClient) { }
  accountUrl = "http://localhost:8089/api/";
     public getFoyers(): Observable<Foyer[]> {
     console.log("service appelé");
-
-    return this.http.get<Foyer[]>(this.accountUrl + "retrieve-all-foyer");
+    const headers = new HttpHeaders().set("Authorization", "Bearer" + this.accessToken);
+      console.log({"token":this.accessToken})
+    return this.http.get<Foyer[]>(this.accountUrl + "retrieve-all-foyer",{headers});
+  }
+  
+  setAccessToken(token: string): void {
+    this.accessToken = token;
   }
 
   public addFoyer(foyer: any) {
-    return this.http.post(this.accountUrl + "/admin/foyer/add-foyer", foyer);
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this.http.post(this.accountUrl + "/admin/foyer/add-foyer", foyer,{headers});
   }
    deleteFoyer(id: any) {
-    return this.http.delete(this.accountUrl + "admin/foyer/delete-foyer/" + id);
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this.http.delete(this.accountUrl + "admin/foyer/delete-foyer/" + id,{headers});
   }
 getFoyerById(id: number): Observable<Foyer> {
-  return this.http.get<Foyer>(this.accountUrl + "admin/foyer/retrieve-foyer/" + id);
+  const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+  return this.http.get<Foyer>(this.accountUrl + "admin/foyer/retrieve-foyer/" + id,{headers});
 }
 
  updateFoyer(foyerId: number, foyer: Foyer): Observable<Foyer> {
+  const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
     return this.http.put<Foyer>(
       this.accountUrl + "admin/foyer/modifier-foyer/" + foyerId,
       foyer,
-      this.httpOptions
-    );
+{headers}    );
   }
  getBlocksByFoyer(foyerId: number): Observable<Bloc[]> {
-    return this.http.get<Bloc[]>(this.accountUrl+"foyer/"+foyerId+"/blocks");
+
+  const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+
+    return this.http.get<Bloc[]>(this.accountUrl+"foyer/"+foyerId+"/blocks",{headers});
   }
 
 }

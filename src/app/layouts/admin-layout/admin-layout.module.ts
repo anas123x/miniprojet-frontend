@@ -13,6 +13,9 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListFoyerComponent } from 'src/app/Foyer/list-foyer/list-foyer.component';
+import { AddFoyerComponent } from 'src/app/Foyer/add-foyer/add-foyer.component';
+import { ModifierFoyerComponent } from 'src/app/Foyer/modifier-foyer/modifier-foyer.component';
+import { AfficherblocsComponent } from 'src/app/Foyer/afficherblocs/afficherblocs.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -22,14 +25,19 @@ import { ListFoyerComponent } from 'src/app/Foyer/list-foyer/list-foyer.componen
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   declarations: [
     DashboardComponent,
 ListFoyerComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    AddFoyerComponent ,
+    ListFoyerComponent ,
+    ModifierFoyerComponent,
+    AfficherblocsComponent
+
   ]
 })
 

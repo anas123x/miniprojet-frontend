@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Foyer } from 'src/app/Models/Foyer';
-import { FoyerservicesService } from 'src/app/Services/foyerservices.service';
+import { FoyerservicesService } from 'src/app/services/foyerservices.service';
 @Component({
   selector: 'app-list-foyer',
   templateUrl: './list-foyer.component.html',
   styleUrls: ['./list-foyer.component.scss']
 })
 export class ListFoyerComponent implements OnInit {
-
+accessToken=''
 foyer: Foyer[] = [];
    constructor(private servicef: FoyerservicesService ) { }
 ngOnInit(): void {
+  
     this.show()
   }
   show(){
+    this.accessToken = localStorage.getItem('access_token') ;
+  this.servicef.setAccessToken(this.accessToken);
     this.servicef.getFoyers().subscribe(
       data=>this.foyer=data
     )

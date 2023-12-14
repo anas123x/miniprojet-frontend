@@ -25,6 +25,9 @@ export class EtudiantsServiceService {
 
   
 
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+  }
   updateStudent(etudiant: etudiant) {
     const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
 

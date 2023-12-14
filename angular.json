@@ -9,13 +9,10 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-<<<<<<< Updated upstream
         "@schematics/angular:component": {
           
         }
-=======
-        "@schematics/angular:component": {}
->>>>>>> Stashed changes
+
       },
       "architect": {
         "build": {
@@ -168,13 +165,13 @@
   },
   "defaultProject": "argon-dashboard-angular",
   "schematics": {
-<<<<<<< Updated upstream
+
     "@schematics/angular:component": {
     
     }
-=======
-    "@schematics/angular:component": {}
->>>>>>> Stashed changes
+
+   
+
   },
   "cli": {
     "analytics": false

@@ -7,6 +7,9 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class MailServiceService {
   private accessToken: string = '';
 
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+  }
   constructor(private _http: HttpClient) { }
   apiUrl: string = environment.baseUrl;
 

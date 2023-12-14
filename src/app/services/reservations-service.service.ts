@@ -23,6 +23,10 @@ export class ReservationsServiceService {
 
     return this._http.get<etudiant[]>(this.apiUrl + "etudiant" + "/retrieve-all-etudiant",{headers})
   }
+  
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+  }
   findStudentWithEmail(email: string){
     const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
 
