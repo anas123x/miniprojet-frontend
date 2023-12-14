@@ -12,12 +12,12 @@ import { EtudiantsServiceService } from 'src/app/services/etudiants-service.serv
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder, ) { }
+  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder,) { }
   userProfileForm: FormGroup;
   addReservationForm: FormGroup;
   connectedStudent!: etudiant;
   ngOnInit(): void {
-    const studentConEmail = 'idoudi.emna@gmail.com';
+    const studentConEmail = 'iidoudichaima@gmail.com';
 
     this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
       this.connectedStudent = data;
@@ -30,8 +30,10 @@ export class UserProfileComponent implements OnInit {
         cin: [this.connectedStudent.cin, [Validators.required]],
       });
       this.addReservationForm = this.fb.group({
-        idReservation: ['', [Validators.required]],
+        idReservation: 0,
         anneeUniversitaire: ['', [Validators.required]],
+        numeroChambre: ['', [Validators.required]]
+
       });
     });
   }
@@ -83,7 +85,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  addReservation(){ 
+  addReservation() {
     console.log("ccccc")
     if (this.addReservationForm.invalid) {
       console.log("ffffff")
@@ -93,15 +95,18 @@ export class UserProfileComponent implements OnInit {
     }
     const reservationData: reservation = {
       idReservation: this.addReservationForm.get('idReservation')?.value,
-      anneeUniversitaire:this.addReservationForm.get('anneeUniversitaire')?.value,
+      anneeUniversitaire: this.addReservationForm.get('anneeUniversitaire')?.value,
       estValid: false,
       etudiants: this.connectedStudent
-      
+
       //nomEt: this.userProfileForm.get('nom')?.value,
       //prenomEt: this.userProfileForm.get('prenom')?.value,
+
     }
+    const numeroChambre: number = this.addReservationForm.get('numeroChambre')?.value
     console.log(reservationData)
-    this.etudiantService.passReservation(this.connectedStudent.idEtudiant,reservationData).subscribe(
+    console.log(numeroChambre)
+    this.etudiantService.passReservation(this.connectedStudent.idEtudiant, reservationData, numeroChambre).subscribe(
       (response) => {
         console.log('Update successful:', response);
         // Handle success, if needed
@@ -112,14 +117,14 @@ export class UserProfileComponent implements OnInit {
         // Handle error, if needed
       }
     );
-   }
-  openModel2(){
+  }
+  openModel2() {
     const modelDiv = document.getElementById('newModal');
     if (modelDiv != null) {
       modelDiv.style.display = 'block';
     }
   }
-  closeModel2(){
+  closeModel2() {
     const modelDiv = document.getElementById('newModal');
     if (modelDiv != null) {
       modelDiv.style.display = 'none';

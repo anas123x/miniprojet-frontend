@@ -27,20 +27,20 @@ export class EtudiantsServiceService {
   }
 
   removeStudent(idEtudiant: number) {
-    return this._http.delete<etudiant>(this.apiUrl + "etudiant" + "/remouve-etudiant/"+idEtudiant)
-  }
-  
-  findStudent(idEtudiant: number){
-    return this._http.get<etudiant>(this.apiUrl+ "etudiant" + "/retrieve-etudiant/"+idEtudiant)
+    return this._http.delete<etudiant>(this.apiUrl + "etudiant" + "/remouve-etudiant/" + idEtudiant)
   }
 
-  findStudentWithEmail(email: string){
-    return this._http.get<etudiant>(this.apiUrl+"etudiant"+"/findEtudiantwithemail/"+email)
+  findStudent(idEtudiant: number) {
+    return this._http.get<etudiant>(this.apiUrl + "etudiant" + "/retrieve-etudiant/" + idEtudiant)
   }
-  passReservation(idEtudiant: number, res:reservation){
+
+  findStudentWithEmail(email: string) {
+    return this._http.get<etudiant>(this.apiUrl + "etudiant" + "/findEtudiantwithemail/" + email)
+  }
+  passReservation(idEtudiant: number, res: reservation, numchambre: number) {
     //long idEtudiant , Reservation res
-    return this._http.post<reservation>(this.apiUrl+"etudiant"+"/passerUneReservation/"+idEtudiant, res)
+    return this._http.post<reservation>(this.apiUrl + "etudiant" + "/passerUneReservation2/" + idEtudiant + "/" + numchambre, res)
   }
-  
+
 
 }

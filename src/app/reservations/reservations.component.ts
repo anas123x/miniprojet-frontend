@@ -3,6 +3,8 @@ import { reservation } from '../Models/reservation';
 import { ReservationsServiceService } from '../services/reservations-service.service';
 import { etudiant } from '../Models/etudiant';
 import { MailServiceService } from '../services/mail-service.service';
+import * as Chart from 'chart.js';
+
 
 @Component({
   selector: 'app-reservations',
@@ -11,8 +13,8 @@ import { MailServiceService } from '../services/mail-service.service';
 })
 export class ReservationsComponent implements OnInit {
 
-  constructor(private reservationService: ReservationsServiceService, private mailerService:MailServiceService) { }
-  stats : number
+  constructor(private reservationService: ReservationsServiceService, private mailerService: MailServiceService) { }
+  stats: number
   reservations: reservation[] = []
   etudiants: etudiant[] = []
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class ReservationsComponent implements OnInit {
         // Add any additional logic or UI updates here
         this.sendMailToStudentWithValidReservation
         this.getReservations()
-        
+
       },
       (error) => {
         console.error('Error validating reservation', error);
@@ -62,7 +64,7 @@ export class ReservationsComponent implements OnInit {
   sendMailToStudentWithValidReservation() {
     const subject = 'Welcome';
     const message = 'Dear student, VotreUniversite vous sollicite de payer la facture. Cordialement';
-  
+
     this.mailerService.sendMail(subject, message).subscribe(
       (response) => {
         console.log('Mail sent to students with valid reservations:', response);
@@ -74,18 +76,35 @@ export class ReservationsComponent implements OnInit {
       }
     );
   }
+  createDonutChart(pourcentageValides: number, pourcentageInvalides: number) {
+    const ctx = document.getElementById('donutChart') as HTMLCanvasElement;
+    const donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Valides', 'Invalides'],
+        datasets: [{
+          data: [pourcentageValides, pourcentageInvalides],
+          backgroundColor: ['#FC7F4C', '#FFFFFF'], // Couleurs de fond pour chaque segment
+          hoverBackgroundColor: ['#FFFFFF', '#FFFFFF'],
+        }]
+      },
+
+      options: {
+
+      }
+    });
+  }
+
   statistiques() {
-    console.log("bbbbbbbbbbbbbbbb");
     this.reservationService.statistiquesReservation().subscribe(
-      (stats: number) => {
-        console.log("aaaaaaaaaaaaaaaaaaaaaa");
-        console.log(stats);
-        this.stats = stats; // Assurez-vous d'avoir une variable stats dans votre composant
+      (pourcentageValides: number) => {
+        const pourcentageInvalides = 100 - pourcentageValides;
+        this.createDonutChart(pourcentageValides, pourcentageInvalides);
       },
       (error) => {
         console.error("Error fetching statistics:", error);
       }
     );
   }
-  
+
 }
