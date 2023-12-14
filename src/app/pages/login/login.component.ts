@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           if(this.userData.role == 'USER'){
             this.router.navigate(['profile'])
           }else if(this.userData.role == 'ADMIN'){
-            this.router.navigate(['dashboard'])
+            this.router.navigate(['tables'])
           }
         },
         (error: HttpErrorResponse) => {
