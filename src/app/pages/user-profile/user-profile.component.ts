@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { etudiant } from 'src/app/Models/etudiant';
+import { reservation } from 'src/app/Models/reservation';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { EtudiantsServiceService } from 'src/app/services/etudiants-service.service';
 
@@ -11,11 +12,12 @@ import { EtudiantsServiceService } from 'src/app/services/etudiants-service.serv
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder) { }
+  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder, ) { }
   userProfileForm: FormGroup;
+  addReservationForm: FormGroup;
   connectedStudent!: etudiant;
   ngOnInit(): void {
-    const studentConEmail = 'iidoudichaima@gmail.com';
+    const studentConEmail = 'idoudi.emna@gmail.com';
 
     this.etudiantService.findStudentWithEmail(studentConEmail).subscribe(data => {
       this.connectedStudent = data;
@@ -27,13 +29,14 @@ export class UserProfileComponent implements OnInit {
         prenom: [this.connectedStudent.prenomEt, [Validators.required]],
         cin: [this.connectedStudent.cin, [Validators.required]],
       });
+      this.addReservationForm = this.fb.group({
+        idReservation: ['', [Validators.required]],
+        anneeUniversitaire: ['', [Validators.required]],
+      });
     });
   }
 
-
-
-
-  onSubmit() {
+  EditProfile() {
     console.log("aaaaa")
     if (this.userProfileForm.invalid) {
       console.log("bbbbbbb")
@@ -80,4 +83,46 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  addReservation(){ 
+    console.log("ccccc")
+    if (this.addReservationForm.invalid) {
+      console.log("ffffff")
+      // If the form is invalid, mark all fields as touched to display validation errors
+      this.addReservationForm.markAllAsTouched();
+      return;
+    }
+    const reservationData: reservation = {
+      idReservation: this.addReservationForm.get('idReservation')?.value,
+      anneeUniversitaire:this.addReservationForm.get('anneeUniversitaire')?.value,
+      estValid: false,
+      etudiants: this.connectedStudent
+      
+      //nomEt: this.userProfileForm.get('nom')?.value,
+      //prenomEt: this.userProfileForm.get('prenom')?.value,
+    }
+    console.log(reservationData)
+    this.etudiantService.passReservation(this.connectedStudent.idEtudiant,reservationData).subscribe(
+      (response) => {
+        console.log('Update successful:', response);
+        // Handle success, if needed
+        this.closeModel2()
+      },
+      (error) => {
+        console.error('Error during update:', error);
+        // Handle error, if needed
+      }
+    );
+   }
+  openModel2(){
+    const modelDiv = document.getElementById('newModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'block';
+    }
+  }
+  closeModel2(){
+    const modelDiv = document.getElementById('newModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'none';
+    }
+  }
 }

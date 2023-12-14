@@ -3,7 +3,7 @@
     <!-- Brand -->
     <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"></a>
     <!-- Form -->
-   
+
     <!-- User -->
     <ul class="navbar-nav align-items-center d-none d-md-flex">
       <li class="nav-item" ngbDropdown placement="bottom-right">
@@ -13,7 +13,7 @@
               <img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">{{connectedStudent.nomEt }}</span>
+              <span class="mb-0 text-sm  font-weight-bold">{{this.connectedStudent.nomEt}}</span>
             </div>
           </div>
         </a>
@@ -38,7 +38,7 @@
             <span>Support</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a  class="dropdown-item" (click)="logout()">
+          <a class="dropdown-item" (click)="logout()">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>
