@@ -28,4 +28,8 @@ export class AuthServiceService {
   register(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}auth/register`, userData);
   }
+  changePassword(data): Observable<any> {
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
+    return this.http.patch<any>(`${this.apiUrl}users/change-password`, data,{headers: headers });
+  }
 }

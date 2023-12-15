@@ -11,9 +11,60 @@
           and manage your projects or assigned tasks</p>
         <button type="button" class="btn btn-primary" (click)="openModel()" data-bs-toggle="modal"
           data-bs-target="#myModal"> Edit Profile </button>
+
+          <button type="button" class="btn btn-primary" (click)="openChangePasswordModel()" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
+
       </div>
     </div>
   </div>
+  <!-- Start Change Password PopUp Model-->
+<div class="modal" id="changePasswordModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+        <button type="button" (click)="closeChangePasswordModel()" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="changePasswordModal">
+        <div class="card-body">
+          <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+            <h6 class="heading-small text-muted mb-4">Change Password</h6>
+            <div class="pl-lg-4">
+              <div class="form-group">
+                <label class="form-control-label" for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control form-control-alternative" placeholder="Current Password">
+              </div>
+              <div class="form-group">
+                <label class="form-control-label" for="newPassword">New Password</label>
+                <input type="password" id="newPassword" formControlName="newPassword" class="form-control form-control-alternative" placeholder="New Password">
+              </div>
+              <div class="form-group">
+                <label class="form-control-label" for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control form-control-alternative" placeholder="Confirm Password">
+              </div>
+            </div>
+            <hr class="my-4" />
+          </form>
+          <div  *ngIf="serverMessage"  class="alert alert-danger text-center mx-3" role="alert">
+            {{serverMessage}}
+     </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="changePassword()">Submit</button>
+          <button type="button" (click)="closeChangePasswordModel()" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Change Password PopUp Model-->
+
   <!-- Start Update Profile PopUp Model-->
   <!-- Modal -->
   <div class="modal" id="myModal">

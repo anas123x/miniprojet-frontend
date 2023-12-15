@@ -60,5 +60,7 @@ export class ChambreserviceService {
 
     return this._http.get<Chambre>(this.apiUrl + `getchparbloc/${nomBloc}`,{headers})
   }
+  
+
 }
 

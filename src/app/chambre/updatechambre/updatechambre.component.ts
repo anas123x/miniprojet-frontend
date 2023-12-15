@@ -12,7 +12,7 @@ import { Chambre } from 'src/app/classes/Chambre';
 })
 export class UpdateChambreComponent implements OnInit {
   chambre : any = {};
-  typesChambre = Object.values(TypeChambre); // Obtenez les valeurs de l'énumération TypeChambre
+  typesChambre = Object.keys(TypeChambre); // Obtenez les valeurs de l'énumération TypeChambre
   
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +27,7 @@ export class UpdateChambreComponent implements OnInit {
       // Utiliser l'ID pour charger les données de la chambre
       this.chambreService.getChambreById(idChambre).subscribe(
         (chambre) => {
+          console.log(this.typesChambre)
           // Charger les données de la chambre dans le formulaire
           this.chambre = chambre;
         },

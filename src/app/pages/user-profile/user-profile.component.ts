@@ -4,7 +4,7 @@ import { etudiant } from 'src/app/Models/etudiant';
 import { reservation } from 'src/app/Models/reservation';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { EtudiantsServiceService } from 'src/app/services/etudiants-service.service';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthServiceService } from 'src/app/Services/auth-service.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -13,11 +13,29 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 export class UserProfileComponent implements OnInit {
   accessToken: string = '';
   studentConEmail = '';
-
-  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder,private authService:AuthServiceService ) { }
+  changePasswordForm: FormGroup;
+  serverMessage='';
+  constructor(private etudiantService: EtudiantsServiceService, private fb: FormBuilder,private authService:AuthServiceService ) {
+    this.changePasswordForm = this.fb.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    }, { validators: this.passwordsMatchValidator });
+   }
   userProfileForm: FormGroup;
   addReservationForm: FormGroup;
   connectedStudent!: etudiant;
+  passwordsMatchValidator(formGroup: FormGroup) {
+    const newPassword = formGroup.get('newPassword').value;
+    const confirmPassword = formGroup.get('confirmPassword').value;
+  
+    if (newPassword === confirmPassword) {
+      return true; // Passwords match
+    } else {
+      this.serverMessage="passwords dont match"
+      return false; // Passwords don't match
+    }
+  }
   ngOnInit(): void {
     this.accessToken = localStorage.getItem('access_token') ;
     this.authService.setAccessToken(this.accessToken)
@@ -41,6 +59,52 @@ export class UserProfileComponent implements OnInit {
     
    
   }
+
+   // Method to open the "Change Password" modal
+   openChangePasswordModel() {
+    const modelDiv = document.getElementById('changePasswordModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'block';
+    }
+  }
+
+  // Method to close the "Change Password" modal
+  closeChangePasswordModel() {
+    const modelDiv = document.getElementById('changePasswordModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'none';
+    }
+  }
+
+  // Method to handle the "Change Password" form submission
+ // Method to handle the "Change Password" form submission
+changePassword() {
+ if(this.passwordsMatchValidator(this.changePasswordForm))
+ { this.serverMessage = "Passwords don't match";}
+  else if (this.changePasswordForm.valid ) {
+    // Prepare the data to be sent to the service
+    const data = {
+      currentPassword: this.changePasswordForm.value.currentPassword,
+      newPassword: this.changePasswordForm.value.newPassword,
+    };
+
+    // Call the changePassword service with the prepared data
+    this.authService.changePassword(data).subscribe(
+      (response) => {
+        // Handle success, e.g., display a success message
+        console.log('Password changed successfully', response.message);
+        this.serverMessage = response.message;
+      },
+      (error) => {
+        // Handle error, e.g., display an error message
+        console.error('Error changing password', error.error.message);
+        this.serverMessage = error.error.message;
+      }
+    );
+
+    }
+}
+
 
   EditProfile() {
     console.log("aaaaa")
