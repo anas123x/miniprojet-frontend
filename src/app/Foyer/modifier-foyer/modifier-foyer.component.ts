@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoyerservicesService } from 'src/app/Services/foyerservices.service';
+import { FoyerservicesService } from 'src/app/services/foyerservices.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Foyer } from 'src/app/Models/Foyer';
 @Component({

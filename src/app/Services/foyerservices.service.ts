@@ -27,7 +27,7 @@ accessToken ="";
   public addFoyer(foyer: any) {
     const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
 
-    return this.http.post(this.accountUrl + "/admin/foyer/add-foyer", foyer,{headers});
+    return this.http.post(this.accountUrl + "admin/foyer/add-foyer", foyer,{headers});
   }
    deleteFoyer(id: any) {
     const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
@@ -40,14 +40,15 @@ getFoyerById(id: number): Observable<Foyer> {
   return this.http.get<Foyer>(this.accountUrl + "admin/foyer/retrieve-foyer/" + id,{headers});
 }
 
- updateFoyer(foyerId: number, foyer: Foyer): Observable<Foyer> {
+updateFoyer(foyerId: number, foyer: Foyer): Observable<Foyer> {
   const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
-
-    return this.http.put<Foyer>(
-      this.accountUrl + "admin/foyer/modifier-foyer/" + foyerId,
-      foyer,
-{headers}    );
-  }
+  console.log("update"+foyerId)
+  return this.http.put<Foyer>(
+    this.accountUrl + "admin/modifier-foyer/" + foyerId,
+    foyer,
+    { headers }
+  );
+}
  getBlocksByFoyer(foyerId: number): Observable<Bloc[]> {
 
   const headers = new HttpHeaders().set("Authorization", "Bearer " + this.accessToken);
